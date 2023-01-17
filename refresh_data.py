@@ -18,7 +18,7 @@ db = client.main
 data = db.data
 
 # read data from dataset and remove the first column
-df = pd.read_csv("data/Data_1000_id_2.csv")
+df = pd.read_csv(os.getenv("CSV_FILE"))
 df.pop(df.columns[0])
 
 # drop the data collection to delete all previous data
