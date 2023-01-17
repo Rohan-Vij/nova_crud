@@ -3,7 +3,7 @@
 import os
 import json
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 import pymongo
 from bson import json_util, ObjectId
@@ -56,13 +56,24 @@ def parse_json(json_data):
 
 # --------------------- ROUTES --------------------- #
 
-@app.route("/data", methods=["GET"])
+@app.route("/datas", methods=["GET"])
 def get_data():
     """Get all data from the collection."""
     # find all data in the collection
     data_list = list(data.find())
     # return data as JSON
     return jsonify(parse_json(data_list)), 200
+
+@app.route("/datas", methods=["POST"])
+def create_data():
+    """Create new data."""
+    # get data from the request
+    data_item = request.get_json()
+
+    # insert data into the collection
+    data.insert_one(data_item)
+
+    return jsonify(parse_json(data_item)), 201
 
 @app.route("/data/<_id>", methods=["GET"])
 def find_by_id(_id):
@@ -74,6 +85,25 @@ def find_by_id(_id):
         return jsonify({"message": "Post not found"}), 404
 
     return jsonify(parse_json(data_item)), 200
+
+@app.route("/data/<_id>", methods=["PUT"])
+def update_by_id(_id):
+    """Update data by id."""
+    # get data from the request
+    data_item = request.get_json()
+
+    # update data by id in the collection
+    data.update_one({"_id": ObjectId(_id)}, {"$set": data_item})
+
+    return jsonify(parse_json(data_item)), 200
+
+@app.route("/data/<_id>", methods=["DELETE"])
+def delete_by_id(_id):
+    """Delete data by id."""
+    # delete data by id in the collection
+    data.delete_one({"_id": ObjectId(_id)})
+
+    return jsonify({"message": "Post deleted"}), 200
 
 # --------------------- RUN --------------------- #
 

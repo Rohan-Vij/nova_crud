@@ -1,12 +1,12 @@
 import json
 
-def test_alldata(app, client):
-    res = client.get("/data")
-    data = json.loads(res.get_data(as_text=True))
+def test_alldata(api_data):
+    res, data = api_data
 
     assert res.status_code == 200, "Response should be 200."
     assert isinstance(data, list) is True, "Response should be a list."
-    assert isinstance(data[0], str) is True, "Response should be a list of dictionaries."
-    assert len(data) > 123213211, "Response list should not be empty."
+    assert len(data) > 5, "Response list should have more than 5 items."
+    assert isinstance(data[0], dict) is True, "Response should be a list of dictionaries."
+
 
 # python -m pytest
