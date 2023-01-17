@@ -38,9 +38,9 @@ else:
 
     # refresh the data collection for testing purposes (ensures consistency)
 
-    # read data from dataset and rebane the first column to 'id'
+    # read data from dataset and remove the first column
     df = pd.read_csv("data/Data_1000_id_2.csv")
-    df = df.rename(columns={df.columns[0]: "id"})
+    df.pop(df.columns[0])
 
     # drop the data collection to delete all previous data
     data.drop()
