@@ -1,6 +1,8 @@
 import json
 import random
+import pytest
 
+@pytest.mark.order(2)
 def test_singledatapoint(app, client, api_data):
     res, data = api_data
 

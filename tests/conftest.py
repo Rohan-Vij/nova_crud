@@ -3,6 +3,9 @@ import json
 import random
 from app import app as flask_app
 
+def pytest_configure():
+    pytest.record_id = ""
+    pytest.random_number = random.randint(1, 1000000)
 
 @pytest.fixture
 def app():
@@ -20,9 +23,3 @@ def api_data(app, client):
     data = json.loads(res.get_data(as_text=True))
 
     return res, data
-
-_id = random.randint(10000, 99999) #out of function scope so this does not rerun
-
-@pytest.fixture
-def random_id():
-    return _id
