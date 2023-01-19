@@ -1,9 +1,11 @@
+"""Test the single data point retrieval endpoint."""
 import json
 import random
 import pytest
 
 @pytest.mark.order(2)
-def test_singledatapoint(app, client, api_data):
+def test_singledatapoint(client, api_data):
+    """Test the /data/<id> (GET) endpoint."""
     res, data = api_data
 
     random_sample = random.sample(data, 2)

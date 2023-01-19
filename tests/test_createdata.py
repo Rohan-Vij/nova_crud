@@ -1,8 +1,10 @@
+"""Test the create data endpoint."""
 import json
 import pytest
 
 @pytest.mark.order(3)
-def test_createdata(app, client):
+def test_createdata(client):
+    """Test the /datas (POST) endpoint."""
 
     document = {
         "Data": pytest.random_number,
@@ -23,7 +25,3 @@ def test_createdata(app, client):
     assert isinstance(data, dict) is True, "Response should be a dictionary."
 
     assert data['Data'] == document['Data'], "Response should be the same as the request."
-
-    
-
-

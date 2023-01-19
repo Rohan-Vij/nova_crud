@@ -1,8 +1,10 @@
+"""Test the update data endpoint."""
 import json
 import pytest
 
 @pytest.mark.order(4)
-def test_updatedata(app, client):
+def test_updatedata(client):
+    """Test the /data/<id> (PUT) endpoint."""
 
     document = {
         "Data": pytest.random_number/2,

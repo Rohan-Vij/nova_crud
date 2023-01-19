@@ -1,8 +1,10 @@
+"""Testing the data deletion endpoint."""
 import json
 import pytest
 
 @pytest.mark.order(5)
-def test_deletedata(app, client):
+def test_deletedata(client):
+    """Test the /data/<id> (DELETE) endpoint."""
 
     # Deleting the data point while it exists
     res = client.delete(f"/data/{pytest.record_id}")
