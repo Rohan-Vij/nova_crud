@@ -5,6 +5,7 @@ It takes in raw data and calculates statistical averages for the data up until t
 
 ## Development Process
 Test-driven development was utilized for the development of this API. The tests were functional, but were tied together to form partial-E2E testing. All the tests were written using [Pytest](https://docs.pytest.org/en/7.2.x/).
+Run the tests using `python -m pytest -s`.
 
 ## Setup
 Solely a `.env` file is needed in the root directory of the project. Its format is the following:
