@@ -108,7 +108,7 @@ class ReadCreate(Resource):
     @api.expect(data_model)
     def post(self):
         """Create new a new data point."""
-        # pylint: disable=global-statement
+        # pylint: disable=global-statement, invalid-name
         # needs to be refactored sometime in the future - this is not good practice
         global running_sum, running_count
 
@@ -149,7 +149,7 @@ class FindCreateDelete(Resource):
     @api.expect(data_model)
     def put(self, _id):
         """Update data by id."""
-        # pylint: disable=global-statement
+        # pylint: disable=global-statement, invalid-name
         # needs to be refactored sometime in the future - this is not good practice
         global running_sum, running_count
 
