@@ -190,7 +190,6 @@ class FindCreateDelete(Resource):
         """Delete data by id."""
         # pylint: disable=global-statement
         # needs to be refactored sometime in the future - this is not good practice
-        global running_sum, running_count
 
         # delete data by id in the collection
         delete = data.delete_one({"_id": ObjectId(_id)})
