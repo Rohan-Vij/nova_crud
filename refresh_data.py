@@ -1,5 +1,5 @@
 """Service to refresh the contents of the main MongoDB databse with information from the dataset."""
-
+# pylint: disable=duplicate-code
 import os
 
 import pymongo

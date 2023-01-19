@@ -1,4 +1,7 @@
 """Entrypoint for the Flask app."""
+
+# pylint: disable=duplicate-code
+
 # import necessary modules
 import os
 import json
