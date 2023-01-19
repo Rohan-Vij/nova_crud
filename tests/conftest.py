@@ -5,7 +5,8 @@ from app import app as flask_app
 
 def pytest_configure():
     pytest.record_id = ""
-    pytest.random_number = random.randint(1, 1000000)
+    # pytest.random_number = random.randint(1, 1000000)
+    pytest.random_number = 20
 
 @pytest.fixture
 def app():

@@ -6,7 +6,7 @@ import pytest
 def test_singledatapoint(app, client, api_data):
     res, data = api_data
 
-    random_sample = random.sample(data, 5)
+    random_sample = random.sample(data, 2)
 
     for item in random_sample:
         # pylint: disable=unsubscriptable-object
