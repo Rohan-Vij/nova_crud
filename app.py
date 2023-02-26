@@ -5,6 +5,10 @@
 # import necessary modules
 import os
 import json
+import gzip
+import time
+import threading
+import time
 
 from flask import Flask, request
 from flask_restx import Api, Resource, fields
@@ -92,6 +96,37 @@ data_model = api.model('Model', {
     # 'Median': fields.Float(required=True),
     # 'Time': fields.Float(required=True)
 })
+
+# --------------------- DUMPING THREAD --------------------- #
+# pylint: disable=fixme
+# # TODO: is periodic checking more efficient than checking every
+#         time a CRUD operation is performed?
+
+def dump_collection():
+    """Dumps the MongoD collection to a .gz (gzip) file if the collection grows too large in size"""
+    while True:
+        # get the size of the collection
+        collection_data = list(data.find())
+        collection_size = len(collection_data)
+
+        # if the collection is too large, dump it to a .gz file
+        if collection_size > 100:
+            print("Collection size too large, dumping to .gz file...")
+
+            # dump the data to a .gz file (unix timestamp in name)
+            with gzip.open(f"dumps/{int(time.time())}_data.json.gz", "wt") as file:
+                file.write(json.dumps(parse_json(collection_data)))
+
+            # drop the collection
+            data.drop()
+        else:
+            print(f"Only {collection_size} documents in the collection. No need to dump yet.")
+
+        # wait for 60  seconds before checking again
+        time.sleep(60)
+
+dump_thread = threading.Thread(target=dump_collection)
+dump_thread.start()
 
 # --------------------- ROUTES --------------------- #
 
