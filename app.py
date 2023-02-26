@@ -6,7 +6,6 @@
 import os
 import json
 import gzip
-import time
 import threading
 import time
 
